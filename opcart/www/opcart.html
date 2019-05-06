@@ -1,0 +1,84 @@
+
+{% extends "templates/web.html" %}
+{% block page_content %}
+
+{% block script %}
+{% endblock %}
+
+{% if homepage.products %}
+
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="hero">
+			<h1 class="text-center">{{ homepage.tag_line or '' }}</h1>
+			<p class="text-center">{{ homepage.description or '' }}</p>
+		</div>
+
+	<div>
+
+	<table id="item_menu" style="width:100%" >
+{% include "opcart/public/js/cart.js" %}
+		<tr>
+			<th>Product Code</th>
+			<th>Product Name</th>
+			<th>Dealer Price</th>
+			<th>MRP</th>
+			<th>Available Stock</th>
+			<th>Order Qty </th>
+			<th>Add To Cart</th>
+		</tr>
+	  {% for item in homepage.products %}
+		<tr>
+		    <td>{{ item.item_code }}</td>
+			  <td>{{ item.item_name }}</td>
+			<td>{{ frappe.db.get_value("Item", {'item_code': item.item_code}, "standard_rate") }}</td>
+			<td></td>
+			<td>{{ stock }}</td>
+			<td> <input type="number" name="quantity" value="1" max="100" style="width:30%"></td>
+			<td class="mybtn"> <button id="btn-add-to-cart" value="Get Selected">Add to cart</button></td>
+	<!--	<td><p><input type="button" value="Add to cart" id="btn-add-to-cart"></input></p></td>-->
+        </tr>
+        {% endfor %}
+
+	</table>
+
+</div>
+
+<a href="/cart"><input  type="button" value="View in cart" id="btn-view-in-cart"style="float: right; margin-top: 25px;background-color:#5e64ff; color:white"></input></a>
+{% endif %}
+
+
+
+<style>
+
+table{
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+th,td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+
+th, td {
+  padding: 10px;
+}
+th {
+  text-align: left;
+  background-color: #05ffb0;
+}
+#btn-add-to-cart {
+
+	background-color:#008000;
+	color:white
+}
+.mybtn{
+	color:green
+}
+
+</style>
+
+{% endblock%}
