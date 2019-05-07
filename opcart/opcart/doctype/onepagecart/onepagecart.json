@@ -4,58 +4,9 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "item_code",
-  "item_name",
-  "dealer_price",
-  "mrp",
-  "qty",
-  "add_to_cart",
-  "confirm_order",
   "route"
  ],
  "fields": [
-  {
-   "fieldname": "item_code",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Item Code",
-   "reqd": 1
-  },
-  {
-   "fieldname": "item_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Item Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "dealer_price",
-   "fieldtype": "Data",
-   "label": "Dealer Price"
-  },
-  {
-   "fieldname": "mrp",
-   "fieldtype": "Data",
-   "label": "MRP"
-  },
-  {
-   "fieldname": "qty",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "QTY",
-   "reqd": 1
-  },
-  {
-   "fieldname": "add_to_cart",
-   "fieldtype": "Check",
-   "label": "Add To Caer",
-   "reqd": 1
-  },
-  {
-   "fieldname": "confirm_order",
-   "fieldtype": "Button",
-   "label": "Confirm Order"
-  },
   {
    "fieldname": "route",
    "fieldtype": "Data",
@@ -63,7 +14,7 @@
   }
  ],
  "has_web_view": 1,
- "modified": "2019-05-06 12:27:43.737348",
+ "modified": "2019-05-07 16:38:17.992840",
  "modified_by": "Administrator",
  "module": "Opcart",
  "name": "OnePageCart",
