@@ -6,3 +6,4 @@ one page shopping cart for erpnext
 
 MIT# opcart
 # opcart
+# onepagecart
