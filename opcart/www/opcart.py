@@ -60,7 +60,7 @@ def get_cart_quotation(doc=None):
 		"cart_settings": frappe.get_cached_doc("Shopping Cart Settings")
 	}
 
-"""@frappe.whitelist()
+@frappe.whitelist()
 def place_order():
 	quotation = _get_cart_quotation()
 	quotation.company = frappe.db.get_value("Shopping Cart Settings", None, "company")
@@ -89,11 +89,10 @@ def place_order():
 	sales_order.insert()
 	sales_order.submit()
 
- if hasattr(frappe.local, "cookie_manager"):
-	 frappe.local.cookie_manager.delete_cookie("cart_count")
+	if hasattr(frappe.local, "cookie_manager"):
+		frappe.local.cookie_manager.delete_cookie("cart_count")
 
- return sales_order.name """
-
+	return sales_order.name
 @frappe.whitelist()
 def request_for_quotation():
 	quotation = _get_cart_quotation()

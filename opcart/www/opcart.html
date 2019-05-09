@@ -45,7 +45,10 @@
 
 </div>
 
-<a href="/cart"><input  type="button" value="View in cart" id="btn-view-in-cart"style="float: right; margin-top: 25px;background-color:#5e64ff; color:white"></input></a>
+<div id="place">
+{% include "opcart/public/js/cart.js" %}
+	<button id="place_btn" style="float: right; margin-top: 25px;margin-right: 25px;background-color:#2E8B57; color:white">Place Order</button></div>
+<a href="/cart"><button id="btn-view-in-cart" style="float: right; margin-top: 25px;margin-right: 25px;background-color:#4B0082; color:white">View in Cart</button></a>
 {% endif %}
 
 

@@ -13,7 +13,9 @@ $('#item_menu').on('click','#btn-add-to-cart', function(){
       alert("Please login first");
     }
     else{
-      cart(item_code,order_qty);
+      update_cart(item_code,order_qty);
+      //cart(item_code,order_qty);
+      //place_order(item_code,order_qty);
       var btn=row.cells[6].getElementsByTagName("button")[0].replaceWith("Item Added");
     }
 
@@ -22,7 +24,8 @@ $('#item_menu').on('click','#btn-add-to-cart', function(){
 
 
 })
-function cart(item_code,order_qty){
+
+function update_cart(item_code,order_qty){
 
   frappe.call({
   	method: "opcart.www.opcart.update_cart",
@@ -37,5 +40,27 @@ function cart(item_code,order_qty){
   });
 
 }
+
+
+function place_order(item_code,order_qty){
+
+  frappe.call({
+  	method: "opcart.www.opcart.place_order",
+    args: {
+          item_code:item_code,
+          qty: order_qty
+        },
+  	callback: (response) => {
+
+  		console.log(response.message);
+      alert("order Placed");
+  	}
+  });
+
+}
+$("#place").on('click','#place_btn',function(){
+  place_order(item_code,order_qty);
+  //alert("Item added");
+});
 
 </script>
