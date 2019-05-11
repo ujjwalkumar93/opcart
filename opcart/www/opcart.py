@@ -80,10 +80,10 @@ def place_order():
 		item.reserved_warehouse, is_stock_item = frappe.db.get_value("Item",
 			item.item_code, ["website_warehouse", "is_stock_item"])
 
-		if is_stock_item:
-			item_stock = get_qty_in_stock(item.item_code, "website_warehouse")
-			if item.qty > item_stock.stock_qty[0][0]:
-				throw(_("Only {0} in stock for item {1}").format(item_stock.stock_qty[0][0], item.item_code))
+		#if is_stock_item:
+			#item_stock = get_qty_in_stock(item.item_code, "website_warehouse")
+			#if item.qty > item_stock.stock_qty[0][0]:
+				#throw(_("Only {0} in stock for item {1}").format(item_stock.stock_qty[0][0], item.item_code))
 
 	sales_order.flags.ignore_permissions = True
 	sales_order.insert()
