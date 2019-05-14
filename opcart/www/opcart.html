@@ -7,9 +7,16 @@
 
 {% block page_content %}
 
-
+<div><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for items.." style="position:relative;  left:675px; top: 55px;"></div>
 
 		{% if items %}
+
+		<div id="place">
+	{% include "opcart/public/js/opcart.js" %}
+	<button id="place_btn" style="float: right; margin-top: 25px;margin-bottom: 10px; background-color:#2E8B57; color:white">Place Order</button></div>
+	<a href="/cart"><button id="btn-view-in-cart" style="float: right; margin-top: 25px;margin-right: 05px;margin-bottom: 10px;background-color:#4B0082; color:white">View in Cart</button></a>
+</div>
+
 		<table id="item_menu" style="width:100%" >
 {% include "opcart/public/js/opcart.js" %}
 <tr>
@@ -38,11 +45,7 @@
 		{% else %}
 			{% include "erpnext/www/all-products/not_found.html" %}
 		{% endif %}
-		<div id="place">
-	{% include "opcart/public/js/opcart.js" %}
-	<button id="place_btn" style="float: right; margin-top: 25px;margin-right: 25px;background-color:#2E8B57; color:white">Place Order</button></div>
-	<a href="/cart"><button id="btn-view-in-cart" style="float: right; margin-top: 25px;margin-right: 25px;background-color:#4B0082; color:white">View in Cart</button></a>
-	</div>
+
 
 <style>
 table{
@@ -68,5 +71,27 @@ th {
 	color:green
 }
 </style>
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("item_menu");
+  tr = table.getElementsByTagName("tr");
 
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
 {% endblock %}
