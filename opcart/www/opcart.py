@@ -1,5 +1,4 @@
 import frappe
-import frappe
 from frappe import throw, _
 import frappe.defaults
 from frappe.utils import cint, flt, get_fullname, cstr
@@ -14,7 +13,7 @@ from erpnext.portal.product_configurator.utils import (get_products_for_website,
 sitemap = 1
 
 def get_context(context):
-	items = frappe.get_all('Item', filters={'show_in_website':1 }, fields=['item_name', 'item_code'])
+	items = frappe.get_all('Item', filters={'show_in_website':1 }, fields=['item_name', 'item_code', 'item_group'])
 	context.items=items
 	context.item_name=items.item_name
 	context.item_code=items.item_code

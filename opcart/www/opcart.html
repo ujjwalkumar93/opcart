@@ -7,15 +7,23 @@
 
 {% block page_content %}
 
-<div><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for items.." style="position:relative;  left:675px; top: 55px;"></div>
+
 
 		{% if items %}
-
-		<div id="place">
-	{% include "opcart/public/js/opcart.js" %}
-	<button id="place_btn" style="float: right; margin-top: 25px;margin-bottom: 10px; background-color:#2E8B57; color:white">Place Order</button></div>
+<span>
+	<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for items.." style="float:left;margin-top: 25px; margin-bottom:10px;">
 	<a href="/cart"><button id="btn-view-in-cart" style="float: right; margin-top: 25px;margin-right: 05px;margin-bottom: 10px;background-color:#4B0082; color:white">View in Cart</button></a>
-</div>
+<button id="ntn_speech" style="float: right; margin-top: 25px;margin-right: 05px;margin-bottom: 10px;background-color:#4B0082; color:white">Search by voice</button>
+
+<select>
+	<option>Select category</option>
+
+<option>{% include "opcart/opcart/templates/dropdown.html" %}</option>
+
+</select>
+
+
+</span>
 
 		<table id="item_menu" style="width:100%" >
 {% include "opcart/public/js/opcart.js" %}
@@ -29,9 +37,11 @@
 			<th>Add To Cart</th>
 		</tr>
 			{% for item in items %}
+
 			<tr>
 		<td>{{ item.item_code }}</td>
-		<td>{{ item.item_name }}</td>
+	<td> {{item.item_name }}</td>
+		<td>{{ frappe.db.get_value("Item", {'item_code':item.item_code}, "standard_rate") }}</td>
 	<td>{{ frappe.db.get_value("Item", {'item_code':item.item_code}, "standard_rate") }}</td>
 	<td>{{ frappe.db.get_value("Item", {'item_code':item.item_code}, "mrp_rate") }}</td>
 	<td>{{ frappe.db.get_value("Stock Ledger Entry", {'item_code':item.item_code} , "qty_after_transaction") }}</td>
