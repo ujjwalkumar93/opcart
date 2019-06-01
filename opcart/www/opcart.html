@@ -1,23 +1,14 @@
 {% extends "templates/web.html" %}
-
 {% block title %}{{ _('Products') }}{% endblock %}
 {% block header %}
 <h3>{{ _('Products') }}</h3>
 {% endblock header %}
-
 {% block page_content %}
-
-
-
-		{% if items %}
+{% if items %}
 <span>
 	<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for items.." style="float:left;margin-top: 25px; margin-bottom:10px;">
 	<a href="/cart"><button type="button" class="btn btn-primary" style="margin-top: 25px; float:right">View in Cart</button></a>
-
-
-
 </span>
-
 		<table class="table" id="item_menu">
 {% include "opcart/public/js/opcart.js" %}
 <thead>
@@ -32,6 +23,7 @@
 		</tr>
 	</thead>
 			{% for item in items %}
+			{% if  frappe.db.get_value("Stock Ledger Entry", {'item_code':item.item_code} , "qty_after_transaction")|int  >0 %}
 <tbody>
 			<tr>
 		<td>{{ item.item_code }}</td>
@@ -39,12 +31,13 @@
 		<td>{{ frappe.db.get_value("Item", {'item_code':item.item_code}, "standard_rate") }}</td>
 
 	<td>{{ frappe.db.get_value("Item", {'item_code':item.item_code}, "mrp_rate") }}</td>
-	<td>{{ frappe.db.get_value("Stock Ledger Entry", {'item_code':item.item_code} , "qty_after_transaction") }}</td>
+	<td style="text-align:center">{{ frappe.db.get_value("Stock Ledger Entry", {'item_code':item.item_code} , "qty_after_transaction")|int }}</td>
 	<td> <input type="number" name="quantity" value="1" min="1" max="100" style="width:50%"></td>
 	<td class="mybtn"> <button id="btn-add-to-cart" value="Get Selected">Add to cart</button></td>
 
 		</tr>
 		<tbody>
+			{% endif %}
 			{% endfor %}
 		</table>
 
