@@ -15,9 +15,10 @@
 <tr>
 			<th>Product Code</th>
 			<th>Product Name</th>
+			<th>Available Stock</th>
 			<th>Dealer Price</th>
 			<th>MRP</th>
-			<th>Available Stock</th>
+
 			<th>Order Qty </th>
 			<th>Add To Cart</th>
 		</tr>
@@ -28,12 +29,13 @@
 			<tr>
 		<td>{{ item.item_code }}</td>
 	<td> {{item.item_name }}</td>
+	<td style="text-align:center">{{ frappe.db.get_value("Stock Ledger Entry", {'item_code':item.item_code} , "qty_after_transaction")|int }}</td>
+
 		<td>{{ frappe.db.get_value("Item", {'item_code':item.item_code}, "standard_rate")|int }}</td>
 
 	<td>{{ frappe.db.get_value("Item", {'item_code':item.item_code}, "mrp_rate")|int }}</td>
-	<td style="text-align:center">{{ frappe.db.get_value("Stock Ledger Entry", {'item_code':item.item_code} , "qty_after_transaction")|int }}</td>
 	<td> <input type="number" name="quantity" value="1" min="1" max="100" style="width:50%"></td>
-	<td class="mybtn"> <button id="btn-add-to-cart" value="Get Selected">Add to cart</button></td>
+	<td class="mybtn"> <button class="btn btn-primary" id="btn-add-to-cart" value="Get Selected">Add to cart</button></td>
 
 		</tr>
 		<tbody>
@@ -45,11 +47,7 @@
 			{% include "erpnext/www/all-products/not_found.html" %}
 		{% endif %}
 
-<style>
-#btn-add-to-cart {
-	background-color:#008000;
-	color:white
-}</style>
+
 
 <script>
 function myFunction() {
