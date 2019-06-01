@@ -12,21 +12,15 @@
 		{% if items %}
 <span>
 	<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for items.." style="float:left;margin-top: 25px; margin-bottom:10px;">
-	<a href="/cart"><button id="btn-view-in-cart" style="float: right; margin-top: 25px;margin-right: 05px;margin-bottom: 10px;background-color:#4B0082; color:white">View in Cart</button></a>
-<button id="ntn_speech" style="float: right; margin-top: 25px;margin-right: 05px;margin-bottom: 10px;background-color:#4B0082; color:white">Search by voice</button>
+	<a href="/cart"><button type="button" class="btn btn-primary" style="margin-top: 25px; float:right">View in Cart</button></a>
 
-<select>
-	<option>Select category</option>
-
-<option>{% include "opcart/opcart/templates/dropdown.html" %}</option>
-
-</select>
 
 
 </span>
 
-		<table id="item_menu" style="width:100%" >
+		<table class="table" id="item_menu">
 {% include "opcart/public/js/opcart.js" %}
+<thead>
 <tr>
 			<th>Product Code</th>
 			<th>Product Name</th>
@@ -36,19 +30,21 @@
 			<th>Order Qty </th>
 			<th>Add To Cart</th>
 		</tr>
+	</thead>
 			{% for item in items %}
-
+<tbody>
 			<tr>
 		<td>{{ item.item_code }}</td>
 	<td> {{item.item_name }}</td>
 		<td>{{ frappe.db.get_value("Item", {'item_code':item.item_code}, "standard_rate") }}</td>
-	<td>{{ frappe.db.get_value("Item", {'item_code':item.item_code}, "standard_rate") }}</td>
+
 	<td>{{ frappe.db.get_value("Item", {'item_code':item.item_code}, "mrp_rate") }}</td>
 	<td>{{ frappe.db.get_value("Stock Ledger Entry", {'item_code':item.item_code} , "qty_after_transaction") }}</td>
 	<td> <input type="number" name="quantity" value="1" min="1" max="100" style="width:50%"></td>
 	<td class="mybtn"> <button id="btn-add-to-cart" value="Get Selected">Add to cart</button></td>
 
 		</tr>
+		<tbody>
 			{% endfor %}
 		</table>
 
@@ -56,31 +52,12 @@
 			{% include "erpnext/www/all-products/not_found.html" %}
 		{% endif %}
 
-
 <style>
-table{
-  border: 2px solid black;
-  border-collapse: collapse;
-}
-th,td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 10px;
-}
-th {
-  text-align: left;
-  background-color: #05ffb0;
-}
 #btn-add-to-cart {
 	background-color:#008000;
 	color:white
-}
-.mybtn{
-	color:green
-}
-</style>
+}</style>
+
 <script>
 function myFunction() {
   // Declare variables
