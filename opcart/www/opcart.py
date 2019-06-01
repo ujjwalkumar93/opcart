@@ -16,8 +16,8 @@ def get_context(context):
 	context.items=items
 	#context.item_name=items.item_name
 	#context.item_code=items.item_code
-	qty=frappe.get_all("Stock Ledger Entry", {'item_code':items.item_code} , "qty_after_transaction")
-	context.qty=items.qty
+	#qty=frappe.get_all("Stock Ledger Entry", {'item_code':items.item_code} , "qty_after_transaction")
+	#context.qty=items.qty
 
 
 
